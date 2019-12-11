@@ -84,7 +84,7 @@ set -e
 #echo "Deployment succesful!"
 
 touch hello
-ehco '哈哈' >> hello
+echo '哈哈' >> hello
 echo 'Start run qshell'
 qshell account ${qiniu_ak} ${qiniu_sk} ${qiniu_username}
 qshell qupload2 --src-dir=./ --bucket=${qiniu_bucket}
