@@ -84,7 +84,7 @@ git push origin "${BRANCH}" --force
 echo "Deployment to git succesful!"
 
 PUBLIC_DIR_PATH=`pwd`
-echo nowPATH is:
+echo "nowPATH is:"
 echo ${PUBLIC_DIR_PATH}
 #
 #echo "Start setup qshell!"
