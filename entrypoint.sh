@@ -93,7 +93,7 @@ echo 'Start run qshell account'
 echo 'Start run qshell upload2'
 ./qshell qupload2 --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}
 cd $PUBLISH_DIR
-
+cp -R /github/home/.qshell/qupload/* ./
 git add --all
 
 echo 'Start Commit'
