@@ -85,9 +85,9 @@ set -e
 
 touch hello
 echo '哈哈' >> hello
-echo 'Start run qshell'
-#qshell account ${qiniu_ak} ${qiniu_sk} ${qiniu_username}
-echo "${qiniu_username}:${qiniu_ak}:${qiniu_sk}" >> /home/runner/.qshell/account.json
-qshell qupload2 --src-dir=./ --bucket=${qiniu_bucket}
+echo 'Start run qshell account'
+qshell account ${AK} ${SK} ${USER_NAME}
+echo 'Start run qshell upload2'
+qshell qupload2 4 --src-dir=${PUBLISH_DIR}/ --bucket=${BUCKET}
 
 
