@@ -91,7 +91,7 @@ echo "setup qshell done!"
 echo 'Start run qshell account'
 ./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
 echo 'Start run qshell upload2'
-./qshell qupload2 --thread-count 8 --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}
+./qshell qupload2 --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}
 cd $PUBLISH_DIR
 
 git add --all
