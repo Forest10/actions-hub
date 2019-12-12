@@ -84,7 +84,7 @@ git push origin "${BRANCH}" --force
 echo "Deployment to git succesful!"
 
 PUBLIC_DIR_PATH=`pwd`
-echo nowPtath->${PUBLIC_DIR_PATH}
+echo ${PUBLIC_DIR_PATH}
 #
 #echo "Start setup qshell!"
 #wget http://devtools.qiniu.com/qshell-linux-x64-v2.4.0.zip -O qshell.zip
