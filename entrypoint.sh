@@ -88,7 +88,8 @@ echo "del .git ok!"
 
 
 PUBLIC_DIR_PATH=`pwd`
-
+echo "退回上一层目录!"
+cd ../
 echo "Start setup qshell!"
 wget http://devtools.qiniu.com/qshell-linux-x64-v2.4.0.zip -O qshell.zip
 unzip qshell.zip
