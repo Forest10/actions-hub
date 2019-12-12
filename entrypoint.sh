@@ -82,6 +82,10 @@ echo 'Start Push'
 git push origin "${BRANCH}" --force
 
 echo "Deployment to git succesful!"
+echo "Start del .git"
+rm -rf .git
+echo "del .git ok!"
+
 
 PUBLIC_DIR_PATH=`pwd`
 
@@ -95,7 +99,7 @@ echo "setup qshell done!"
 echo 'Start run qshell account'
 ./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
 echo 'Start run qshell upload2'
-./qshell qupload2 4 --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}
+./qshell qupload2 16 --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}
 echo 'done  upload qiniu'
 
 
