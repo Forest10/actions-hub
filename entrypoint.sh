@@ -83,18 +83,21 @@ git push origin "${BRANCH}" --force
 
 echo "Deployment to git succesful!"
 
-echo "Start setup qshell!"
-wget http://devtools.qiniu.com/qshell-linux-x64-v2.4.0.zip -O qshell.zip
-unzip qshell.zip
-mv qshell-linux-x64-v2.4.0 qshell
-chmod u+x qshell
-echo "setup qshell done!"
-
-echo 'Start run qshell account'
-./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
-echo 'Start run qshell upload2'
-./qshell qupload2 4 --src-dir=${PUBLISH_DIR}/ --bucket=${QINIU_BUCKET}
-echo 'done  upload qiniu'
-
-
+PUBLIC_DIR_PATH=`pwd`
+echo nowPtath->${PUBLIC_DIR_PATH}
+#
+#echo "Start setup qshell!"
+#wget http://devtools.qiniu.com/qshell-linux-x64-v2.4.0.zip -O qshell.zip
+#unzip qshell.zip
+#mv qshell-linux-x64-v2.4.0 qshell
+#chmod u+x qshell
+#echo "setup qshell done!"
+#
+#echo 'Start run qshell account'
+#./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
+#echo 'Start run qshell upload2'
+#./qshell qupload2 4 --src-dir=${PUBLISH_DIR}/ --bucket=${QINIU_BUCKET}
+#echo 'done  upload qiniu'
+#
+#
 
