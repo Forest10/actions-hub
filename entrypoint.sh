@@ -73,7 +73,6 @@ git remote add origin "${REPOSITORY_PATH}"
 
 git checkout --orphan $BRANCH
 
-
 git add --all
 
 echo 'Start Commit'
@@ -104,8 +103,6 @@ echo 'Start run qshell account'
 echo 'Start run qshell upload2'
 ##增量更新上传(外加多线程)
 ./qshell qupload2  --overwrite --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}  --rescan-local --thread-count 16
-
-
 echo 'done  upload qiniu'
 
 
