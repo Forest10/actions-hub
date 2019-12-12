@@ -73,9 +73,20 @@ git remote add origin "${REPOSITORY_PATH}"
 
 git checkout --orphan $BRANCH
 
-#echo "Start del .git"
-#rm -rf .git
-#echo "del .git ok!"
+
+git add --all
+
+echo 'Start Commit'
+git commit --allow-empty -m "Deploying to ${BRANCH}"
+
+echo 'Start Push'
+git push origin "${BRANCH}" --force
+
+echo "Deployment to git succesful!"
+
+echo "Start del .git"
+rm -rf .git
+echo "del .git ok!"
 
 
 PUBLIC_DIR_PATH=`pwd`
@@ -91,18 +102,9 @@ echo "setup qshell done!"
 echo 'Start run qshell account'
 ./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
 echo 'Start run qshell upload2'
-./qshell qupload2 --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}
-cd $PUBLISH_DIR
-cp -R /github/home/.qshell/qupload/* ./
-git add --all
+##增量更新上传(外加多线程)
+./qshell qupload2  --overwrite --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}  --rescan-local --thread-count 16
 
-echo 'Start Commit'
-git commit --allow-empty -m "Deploying to ${BRANCH}"
-
-echo 'Start Push'
-git push origin "${BRANCH}" --force
-
-echo "Deployment to git succesful!"
 
 echo 'done  upload qiniu'
 
