@@ -114,10 +114,10 @@ git pull
 cd ${QSHELL_DIR_PATH}
 echo 'Start run qshell account'
 ./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
+ls ~/.qshell/
+#echo "退回到${ACTION_QSHELL_HOME}!"
 
-echo "退回到${ACTION_QSHELL_HOME}!"
-
-cd $ACTION_QSHELL_HOME
+#cd $ACTION_QSHELL_HOME
 #
 #echo 'Start run qshell upload2'
 ###增量更新上传(外加多线程)
