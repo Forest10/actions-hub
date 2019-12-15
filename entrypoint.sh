@@ -60,23 +60,26 @@ echo "Generate file ..."
 
 
 cd $PUBLISH_DIR
+HEXO_PUBLICL_DIR=`pwd`
 echo "copy CNAME if exists"
 if [ -n "${CNAME}" ]; then
     echo ${CNAME} > CNAME
 fi
 echo "Config git ..."
-
 # Configures Git.
-HEXO_GIT_DIR=../hexo_git_dir
+cd ../
+mkdir hexo_git_dir
+cd hexo_git_dir
+HEXO_GIT_DIR=`pwd`
 git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
 git clone https://$PERSONAL_TOKEN@github.com/${PUBLISH_REPOSITORY}.git ${HEXO_GIT_DIR}
+cd ${HEXO_GIT_DIR}
 git fetch
 git checkout master
 git pull
 
-cd ${HEXO_GIT_DIR}
-cp -R ${$GITHUB_WORKSPACE}/${PUBLISH_DIR} ./
+cp -R ${HEXO_PUBLICL_DIR}/ ${HEXO_GIT_DIR}
 echo `date` > date.txt
 git add .
 git commit -m '哈哈'
@@ -91,9 +94,8 @@ rm -rf .git
 echo "del .git ok!"
 
 
-PUBLIC_DIR_PATH=`pwd`
 echo "退回上一层目录!"
-cd ../
+cd ${HEXO_PUBLICL_DIR}/../
 QSHELL_DIR_PATH=`pwd`
 echo "Start setup qshell!"
 wget http://devtools.qiniu.com/qshell-linux-x64-v2.4.0.zip -O qshell.zip
@@ -119,7 +121,7 @@ fi
 
 echo 'Start run qshell upload2'
 ##增量更新上传(外加多线程)
-./qshell qupload2  --overwrite --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}  --rescan-local --thread-count 16 --check-size
+./qshell qupload2  --overwrite --src-dir=${HEXO_PUBLICL_DIR}/ --bucket=${QINIU_BUCKET}  --rescan-local --thread-count 16 --check-size
 echo 'done  upload qiniu'
 echo 'qiniu upload2 cache to git'
 ##假如不报错 就把当前的变化直接传送到git上
