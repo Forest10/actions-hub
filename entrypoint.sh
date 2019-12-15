@@ -67,10 +67,7 @@ if [ -n "${CNAME}" ]; then
 fi
 echo "Config git ..."
 # Configures Git.
-cd ../
-mkdir hexo_git_dir
-cd hexo_git_dir
-HEXO_GIT_DIR=`pwd`
+HEXO_GIT_DIR=$GITHUB_WORKSPACE/hexo_git_dir
 git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
 git clone https://$PERSONAL_TOKEN@github.com/${PUBLISH_REPOSITORY}.git ${HEXO_GIT_DIR}
