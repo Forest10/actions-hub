@@ -104,7 +104,7 @@ mv qshell-linux-x64-v2.4.0 qshell
 chmod u+x qshell
 echo "setup qshell done!"
 
-echo "退回上一层目录!"
+echo "退回到${ACTION_QSHELL_HOME}!"
 
 cd $ACTION_QSHELL_HOME
 echo 'Start get qshell cache from git'
