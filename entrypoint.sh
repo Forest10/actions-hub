@@ -109,6 +109,7 @@ echo "setup qshell done!"
 #cd $ACTION_QSHELL_HOME
 echo 'Start get qshell cache from git'
 git clone https://$PERSONAL_TOKEN@github.com/${QINIU_LOCAL_CACHE_GIT_REPOSITORY}.git
+git fetch
 git checkout ${QINIU_LOCAL_CACHE_GIT_REPOSITORY_BRANCH}
 git pull
 
