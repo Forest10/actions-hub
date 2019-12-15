@@ -51,6 +51,7 @@ echo "Deploy to ${PRO_REPOSITORY}"
 
 # Directs the action to the the Github workspace.
 cd $GITHUB_WORKSPACE
+echo "now in $GITHUB_WORKSPACE"
 
 echo "npm install ..."
 npm install
