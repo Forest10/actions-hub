@@ -103,10 +103,10 @@ unzip qshell.zip
 mv qshell-linux-x64-v2.4.0 qshell
 chmod u+x qshell
 echo "setup qshell done!"
-
-echo "退回到${ACTION_QSHELL_HOME}!"
-
-cd $ACTION_QSHELL_HOME
+#
+#echo "退回到${ACTION_QSHELL_HOME}!"
+#
+#cd $ACTION_QSHELL_HOME
 echo 'Start get qshell cache from git'
 git clone https://$PERSONAL_TOKEN@github.com/${QINIU_LOCAL_CACHE_GIT_REPOSITORY}.git
 git checkout ${QINIU_LOCAL_CACHE_GIT_REPOSITORY_BRANCH}
@@ -115,17 +115,20 @@ git pull
 cd ${QSHELL_DIR_PATH}
 echo 'Start run qshell account'
 ./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
-echo 'Start run qshell upload2'
-##增量更新上传(外加多线程)
-./qshell qupload2  --overwrite --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}  --rescan-local --thread-count 16
-echo 'done  upload qiniu'
-echo 'qiniu upload2 cache to git'
-##加入不报错 就把当前的变化直接传送到git上
-cd $ACTION_QSHELL_HOME
-git add .
-git commit -m "transfer local upload2 cache to git"
-git push
-echo 'qiniu upload2 cache to git done!'
+echo 'Start run locate .qshell'
+locate .qshell
+#
+#echo 'Start run qshell upload2'
+###增量更新上传(外加多线程)
+#./qshell qupload2  --overwrite --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}  --rescan-local --thread-count 16
+#echo 'done  upload qiniu'
+#echo 'qiniu upload2 cache to git'
+###加入不报错 就把当前的变化直接传送到git上
+#cd $ACTION_QSHELL_HOME
+#git add .
+#git commit -m "transfer local upload2 cache to git"
+#git push
+#echo 'qiniu upload2 cache to git done!'
 
 
 
