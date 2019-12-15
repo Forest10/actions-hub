@@ -109,6 +109,12 @@ git pull
 
 ##回退到下载QSHELL_DIR_PATH
 cd ${QSHELL_DIR_PATH}
+if [ -n "${FORCE_REFRESH_QINIU_ACCOUNT}" ]; then
+    echo 'Start run qshell account for use new ak sk'
+    ./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
+fi
+
+
 echo 'Start run qshell upload2'
 ##增量更新上传(外加多线程)
 ./qshell qupload2  --overwrite --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}  --rescan-local --thread-count 16 --check-size
