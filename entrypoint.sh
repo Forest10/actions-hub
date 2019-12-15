@@ -67,20 +67,22 @@ fi
 echo "Config git ..."
 
 # Configures Git.
-git init
+HEXO_GIT_DIR=../hexo_git_dir
 git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
-git remote add origin "${REPOSITORY_PATH}"
+git clone git clone https://$PERSONAL_TOKEN@github.com/${PUBLISH_REPOSITORY}.git ${HEXO_GIT_DIR}
+git fetch
+git checkout master
+git pull
 
-git checkout --orphan $BRANCH
+cd ${HEXO_GIT_DIR}
+cp -R ${$GITHUB_WORKSPACE}/${PUBLISH_DIR} ./
+echo `date` > date.txt
+git add .
+git commit -m '哈哈'
 
-git add --all
-
-echo 'Start Commit'
-git commit --allow-empty -m "Deploying to ${BRANCH}"
-
-echo 'Start Push'
-git push origin "${BRANCH}" --force
+echo 'Start push'
+git push
 
 echo "Deployment to git succesful!"
 
@@ -122,8 +124,10 @@ echo 'done  upload qiniu'
 echo 'qiniu upload2 cache to git'
 ##假如不报错 就把当前的变化直接传送到git上
 cd $ACTION_QSHELL_HOME
+echo `date` > date.txt
 git add .
 git commit -m 'transfer local upload2 cache to git'
+
 git push
 echo 'qiniu upload2 cache to git done!'
 
