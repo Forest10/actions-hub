@@ -120,7 +120,7 @@ echo 'qiniu upload2 cache to git'
 ##假如不报错 就把当前的变化直接传送到git上
 cd $ACTION_QSHELL_HOME
 git add .
-git commit -m transfer local upload2 cache to git
+git commit -m "transfer local upload2 cache to git"
 git push
 echo 'qiniu upload2 cache to git done!'
 
