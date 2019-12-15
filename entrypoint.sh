@@ -14,7 +14,7 @@ if [ -n "${EMAIL}" ]; then
 else
     PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
-ACTION_QSHELL_HOME=~/.qshell/
+ACTION_QSHELL_HOME=~/.qshell
 
 if [ -n "${PUBLISH_REPOSITORY}" ]; then
     PRO_REPOSITORY=${PUBLISH_REPOSITORY}
