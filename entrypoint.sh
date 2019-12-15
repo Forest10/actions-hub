@@ -74,6 +74,7 @@ HEXO_GIT_DIR=`pwd`
 git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
 git clone https://$PERSONAL_TOKEN@github.com/${PUBLISH_REPOSITORY}.git ${HEXO_GIT_DIR}
+pwd
 cd ${HEXO_GIT_DIR}
 git fetch
 git checkout master
