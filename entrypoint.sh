@@ -107,7 +107,7 @@ echo "setup qshell done!"
 #echo "退回到${ACTION_QSHELL_HOME}!"
 #
 #cd $ACTION_QSHELL_HOME
-echo "Start get qshell cache from git->"${QINIU_LOCAL_CACHE_GIT_REPOSITORY}"
+echo "Start get qshell cache from git->${QINIU_LOCAL_CACHE_GIT_REPOSITORY}"
 git clone https://$PERSONAL_TOKEN@github.com/${QINIU_LOCAL_CACHE_GIT_REPOSITORY}.git
 git fetch
 git checkout ${QINIU_LOCAL_CACHE_GIT_REPOSITORY_BRANCH}
@@ -127,7 +127,7 @@ locate .qshell
 ###加入不报错 就把当前的变化直接传送到git上
 #cd $ACTION_QSHELL_HOME
 #git add .
-#git commit -m "transfer local upload2 cache to git"
+#git commit -m transfer local upload2 cache to git
 #git push
 #echo 'qiniu upload2 cache to git done!'
 
