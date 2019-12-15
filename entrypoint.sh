@@ -114,7 +114,7 @@ echo 'Start run qshell account'
 
 echo 'Start run qshell upload2'
 ##增量更新上传(外加多线程)
-./qshell qupload2  --overwrite --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}  --rescan-local --thread-count 16
+./qshell qupload2  --overwrite --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}  --rescan-local --thread-count 16 --check-size
 echo 'done  upload qiniu'
 echo 'qiniu upload2 cache to git'
 ##假如不报错 就把当前的变化直接传送到git上
