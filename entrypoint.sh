@@ -70,7 +70,7 @@ echo "Config git ..."
 HEXO_GIT_DIR=../hexo_git_dir
 git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
-git clone git clone https://$PERSONAL_TOKEN@github.com/${PUBLISH_REPOSITORY}.git ${HEXO_GIT_DIR}
+git clone https://$PERSONAL_TOKEN@github.com/${PUBLISH_REPOSITORY}.git ${HEXO_GIT_DIR}
 git fetch
 git checkout master
 git pull
