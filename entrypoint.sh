@@ -15,7 +15,7 @@ else
     PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
 if [ -n "${QSHELL_HOME}" ]; then
-    ACTION_QSHELL_HOME=$GITHUB_WORKSPACE/${QSHELL_HOME}
+    ACTION_QSHELL_HOME=${QSHELL_HOME}
 else
     ACTION_QSHELL_HOME="$GITHUB_WORKSPACE/home/runner/.qshell"
 fi
