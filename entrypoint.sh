@@ -104,9 +104,6 @@ mv qshell-linux-x64-v2.4.0 qshell
 chmod u+x qshell
 echo "setup qshell done!"
 
-echo "退回到${ACTION_QSHELL_HOME}!"
-
-cd $ACTION_QSHELL_HOME
 echo "Start get qshell cache from git->${QINIU_LOCAL_CACHE_GIT_REPOSITORY}"
 git clone https://$PERSONAL_TOKEN@github.com/${QINIU_LOCAL_CACHE_GIT_REPOSITORY}.git qiniu
 cd qiniu
@@ -118,6 +115,9 @@ cd ${QSHELL_DIR_PATH}
 echo 'Start run qshell account'
 ./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
 
+echo "退回到${ACTION_QSHELL_HOME}!"
+
+cd $ACTION_QSHELL_HOME
 #
 #echo 'Start run qshell upload2'
 ###增量更新上传(外加多线程)
