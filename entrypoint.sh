@@ -109,9 +109,6 @@ git pull
 
 ##回退到下载QSHELL_DIR_PATH
 cd ${QSHELL_DIR_PATH}
-echo 'Start run qshell account'
-./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
-
 echo 'Start run qshell upload2'
 ##增量更新上传(外加多线程)
 ./qshell qupload2  --overwrite --src-dir=${PUBLIC_DIR_PATH}/ --bucket=${QINIU_BUCKET}  --rescan-local --thread-count 16 --check-size
