@@ -85,6 +85,8 @@ echo "Deployment to git succesful!"
 
 
 echo "do  rsync diff file to HEXO_UPDATE_DIR!"
+git diff HEAD  HEAD~1 --name-only
+
 
 HEXO_UPDATE_DIR=$GITHUB_WORKSPACE/hexo_update_dir_in_action
 mkdir -p ${HEXO_UPDATE_DIR}
