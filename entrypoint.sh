@@ -56,10 +56,6 @@ echo "Generate file ..."
 ./node_modules/hexo/bin/hexo generate
 
 cd $PUBLISH_DIR
-echo "PUBLISH_DIR ls ..."
-
-ls
-echo "PUBLISH_DIR ls ok"
 
 HEXO_PUBLICL_DIR=`pwd`
 echo "copy CNAME if exists"
@@ -80,9 +76,13 @@ git pull
 
 
 cp -R ${HEXO_PUBLICL_DIR}/ ${HEXO_GIT_DIR}
+
 echo `date` > date.txt
 git add .
 git commit -m '哈哈'
+echo "HEXO_GIT_DIR ls ..."
+ls
+echo "HEXO_GIT_DIR ls ok"
 
 HEXO_UPDATE_ZIP_PATH=`pwd`
 HEXO_DIFF_UPDATE_FILE_NAME=hexo_diff_update.zip
