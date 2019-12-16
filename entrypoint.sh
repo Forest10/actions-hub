@@ -129,7 +129,7 @@ fi
 
 echo 'Start run qshell upload2'
 ##增量更新上传(外加多线程)
-./qshell qupload2 --overwrite --src-dir=${HEXO_PUBLICL_DIR}/ --bucket=${QINIU_BUCKET} --rescan-local --thread-count 16 --file-list "date.txt"
+./qshell qupload2 --overwrite --src-dir=${HEXO_PUBLICL_DIR}/ --bucket=${QINIU_BUCKET} --rescan-local --thread-count 16 --file-list date.txt
 echo 'done  upload qiniu'
 echo 'qiniu upload2 cache to git'
 ##假如不报错 就把当前的变化直接传送到git上
