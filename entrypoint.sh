@@ -72,7 +72,7 @@ git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
 git clone https://$PERSONAL_TOKEN@github.com/${PUBLISH_REPOSITORY}.git ${HEXO_GIT_DIR}
 cd ${HEXO_GIT_DIR}
-git fetch
+git fetch origin
 git pull
 
 
@@ -81,10 +81,11 @@ echo `date` > date.txt
 git add .
 git commit -m '哈哈'
 echo 'git diff  start'
-git diff --name-only > git_diff.txt
+git diff master origin/master --name-only > git_diff.txt
 echo 'date.txt' >> git_diff.txt
 cat git_diff.txt
-echo 'git diff  end'
+echo 'git diff  end exit'
+exit
 
 HEXO_PUBLICL_FILE_DIFF_FILE=`date +%s`.txt
 touch ${HEXO_PUBLICL_FILE_DIFF_FILE}
