@@ -81,8 +81,8 @@ echo `date` > date.txt
 git add .
 git commit -m '哈哈'
 HEXO_PUBLICL_FILE_DIFF_FILE=`date +%s`.txt
-chmod 777 ${HEXO_PUBLICL_FILE_DIFF_FILE}
 git diff --name-only > ${HEXO_PUBLICL_FILE_DIFF_FILE}
+chmod 777 ${HEXO_PUBLICL_FILE_DIFF_FILE}
 NEED_REWRITE_QINIU_FILE=`cat ${HEXO_PUBLICL_FILE_DIFF_FILE} | xargs`
 echo 'Start push'
 git push
