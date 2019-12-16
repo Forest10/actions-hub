@@ -85,7 +85,7 @@ git commit -m '哈哈'
 NOW_TIMESTAMP=`date +%s`
 
 HEXO_UPDATE_ZIP_PATH=${GITHUB_WORKSPACE}/${NOW_TIMESTAMP}
-mkdir -p "${HEXO_UPDATE_ZIP_PATH}"
+mkdir -p ${HEXO_UPDATE_ZIP_PATH}
 HEXO_UPDATE_ZIP_NAME=${NOW_TIMESTAMP}.zip
 git diff --name-only HEAD"^" --name-only | xargs zip ${HEXO_UPDATE_ZIP_PATH}/${HEXO_UPDATE_ZIP_NAME}
 echo 'Start push'
