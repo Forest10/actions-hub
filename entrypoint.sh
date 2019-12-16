@@ -15,6 +15,9 @@ if [ -n "${EMAIL}" ]; then
 else
     PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
+if  ${QINIU_FORCE_REFRESH_BUCKET} -eq 'true' ; then
+    echo 'REFRESH_BUCKET'
+fi
 ACTION_QSHELL_HOME=~/.qshell
 
 if [ -n "${PUBLISH_REPOSITORY}" ]; then
