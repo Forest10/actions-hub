@@ -82,16 +82,12 @@ echo `date` > date.txt
 git add .
 git commit -m '哈哈'
 
+NOW_TIMESTAMP=`date +%s`
 
-HEXO_PUBLICL_FILE_DIFF_FILE=`date +%s`.txt
-touch ${HEXO_PUBLICL_FILE_DIFF_FILE}
-chmod 777 ${HEXO_PUBLICL_FILE_DIFF_FILE}
-git diff --name-only HEAD"^" --name-only > ${HEXO_PUBLICL_FILE_DIFF_FILE}
-echo 'cat ${HEXO_PUBLICL_FILE_DIFF_FILE}'
-cat ${HEXO_PUBLICL_FILE_DIFF_FILE}
-NEED_REWRITE_QINIU_FILE=`cat ${HEXO_PUBLICL_FILE_DIFF_FILE} | xargs`
-echo 'cat ${NEED_REWRITE_QINIU_FILE}'
-echo "${NEED_REWRITE_QINIU_FILE}"
+HEXO_UPDATE_ZIP_PATH=${GITHUB_WORKSPACE}/${NOW_TIMESTAMP}
+mkdir -p "${HEXO_UPDATE_ZIP_PATH}"
+HEXO_UPDATE_ZIP_NAME=${NOW_TIMESTAMP}.zip
+git diff --name-only HEAD"^" --name-only | xargs zip ${HEXO_UPDATE_ZIP_PATH}/${HEXO_UPDATE_ZIP_NAME}
 echo 'Start push'
 git push
 
@@ -102,9 +98,14 @@ rm -rf .git
 echo "del .git ok!"
 
 
-echo "退回上一层目录!"
-cd ${HEXO_PUBLICL_DIR}/../
-QSHELL_DIR_PATH=`pwd`
+cd ${HEXO_UPDATE_ZIP_PATH}
+UNZIP_UPDATE_DIR=${HEXO_UPDATE_ZIP_PATH}/${NOW_TIMESTAMP}_update
+mkdir ${UNZIP_UPDATE_DIR}
+upzip ${HEXO_UPDATE_ZIP_NAME} -d ${UNZIP_UPDATE_DIR}
+
+echo "回到qshell_home!"
+QSHELL_DIR_PATH=$GITHUB_WORKSPACE/qshell_dir
+mkdir -p ${QSHELL_DIR_PATH}
 echo "Start setup qshell!"
 wget http://devtools.qiniu.com/qshell-linux-x64-v2.4.0.zip -O qshell.zip
 unzip qshell.zip
@@ -112,34 +113,17 @@ mv qshell-linux-x64-v2.4.0 qshell
 chmod u+x qshell
 echo "setup qshell done!"
 
-echo "Start get qshell cache from git->${QINIU_LOCAL_CACHE_GIT_REPOSITORY}"
-git clone https://$PERSONAL_TOKEN@github.com/${QINIU_LOCAL_CACHE_GIT_REPOSITORY}.git $ACTION_QSHELL_HOME
-cd $ACTION_QSHELL_HOME
-git fetch
-git checkout ${QINIU_LOCAL_CACHE_GIT_REPOSITORY_BRANCH}
-git pull
 
-##回退到下载QSHELL_DIR_PATH
 cd ${QSHELL_DIR_PATH}
-if [ -n "${FORCE_REFRESH_QINIU_ACCOUNT}" ]; then
-    echo 'Start run qshell account for use new ak sk'
-    ./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
-fi
-
+echo 'Start run qshell account for use new ak sk'
+./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
 
 echo 'Start run qshell upload2'
+cd
 ##增量更新上传(外加多线程)
-./qshell qupload2 --overwrite --src-dir=${HEXO_PUBLICL_DIR}/ --bucket=${QINIU_BUCKET} --rescan-local --thread-count 16 --file-list date.txt
+./qshell qupload2 --overwrite --src-dir=${UNZIP_UPDATE_DIR}/ --bucket=${QINIU_BUCKET} --thread-count 16
 echo 'done  upload qiniu'
-echo 'qiniu upload2 cache to git'
-##假如不报错 就把当前的变化直接传送到git上
-cd $ACTION_QSHELL_HOME
-echo `date` > date.txt
-git add .
-git commit -m 'transfer local upload2 cache to git'
 
-git push
-echo 'qiniu upload2 cache to git done!'
 
 
 
