@@ -48,18 +48,16 @@ echo "Deploy to ${PRO_REPOSITORY}"
 
 # Directs the action to the the Github workspace.
 cd $GITHUB_WORKSPACE
-#
-#echo "npm install ..."
-#npm install
-#
-#
-#echo "Clean folder ..."
-#./node_modules/hexo/bin/hexo clean
-#
-#echo "Generate file ..."
-#./node_modules/hexo/bin/hexo generate
-#
-mkdir ./public
+
+echo "npm install ..."
+npm install
+
+
+echo "Clean folder ..."
+./node_modules/hexo/bin/hexo clean
+
+echo "Generate file ..."
+./node_modules/hexo/bin/hexo generate
 
 cd $PUBLISH_DIR
 HEXO_PUBLICL_DIR=`pwd`
@@ -87,7 +85,6 @@ echo 'git diff  start'
 git diff --name-only HEAD"^" --name-only > git_diff.txt
 cat git_diff.txt
 echo 'git diff  end exit'
-exit
 
 HEXO_PUBLICL_FILE_DIFF_FILE=`date +%s`.txt
 touch ${HEXO_PUBLICL_FILE_DIFF_FILE}
