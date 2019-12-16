@@ -82,7 +82,7 @@ git checkout ${BRANCH}
 
 # rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR
 echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR'
-rsync -av ${HEXO_PUBLICL_DIR}/* ${HEXO_GIT_DIR}
+cp -R ${HEXO_PUBLICL_DIR}/* ${HEXO_GIT_DIR}
 echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR done'
 
 
