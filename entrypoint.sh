@@ -15,9 +15,7 @@ if [ -n "${EMAIL}" ]; then
 else
     PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
-if  ${QINIU_FORCE_REFRESH_BUCKET} -eq 'true' ; then
-    echo 'REFRESH_BUCKET'
-fi
+
 ACTION_QSHELL_HOME=~/.qshell
 
 if [ -n "${PUBLISH_REPOSITORY}" ]; then
@@ -58,6 +56,11 @@ echo "Generate file ..."
 ./node_modules/hexo/bin/hexo generate
 
 cd $PUBLISH_DIR
+echo "PUBLISH_DIR ls ..."
+
+ls
+echo "PUBLISH_DIR ls ok"
+
 HEXO_PUBLICL_DIR=`pwd`
 echo "copy CNAME if exists"
 if [ -n "${CNAME}" ]; then
