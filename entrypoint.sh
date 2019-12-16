@@ -3,6 +3,7 @@
 set -e
 
 
+
 # check values
 if [ -n "${USER_NAME}" ]; then
     PUBLISH_USER_NAME=${USER_NAME}
@@ -83,7 +84,7 @@ echo `date` > date.txt
 git add .
 git commit -m '哈哈'
 echo 'git diff  start'
-git diff origin/master --name-only > git_diff.txt
+git diff --name-only HEAD"^" --name-only > git_diff.txt
 cat git_diff.txt
 echo 'git diff  end exit'
 exit
