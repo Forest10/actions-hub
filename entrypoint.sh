@@ -98,6 +98,7 @@ unzip ${HEXO_DIFF_UPDATE_FILE_NAME} -d ${UNZIP_HEXO_UPDATE_DIR}
 echo "回到qshell_home!"
 QSHELL_DIR_PATH=$GITHUB_WORKSPACE/qshell_dir
 mkdir -p ${QSHELL_DIR_PATH}
+cd ${QSHELL_DIR_PATH}
 echo "Start setup qshell!"
 wget http://devtools.qiniu.com/qshell-linux-x64-v2.4.0.zip -O qshell.zip
 unzip qshell.zip
