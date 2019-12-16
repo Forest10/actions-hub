@@ -111,7 +111,7 @@ mkdir -p ${HEXO_UPDATE_DIR}
 GIT_DIFF_RSYNC_FILE_NAME=git_diff_rsync.txt
 git diff HEAD  HEAD~1 --name-only > ${GIT_DIFF_RSYNC_FILE_NAME}
 
-for i in ${GIT_DIFF_RSYNC_FILE_NAME};do echo ${i} && rsync  -R ${i} ${HEXO_UPDATE_DIR};done
+for i in `cat "${GIT_DIFF_RSYNC_FILE_NAME}"`;do echo ${i} && rsync  -R ${i} ${HEXO_UPDATE_DIR};done
 echo "do  rsync diff file to HEXO_UPDATE_DIR done!"
 
 
