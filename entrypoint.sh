@@ -71,6 +71,8 @@ fi
 echo "Config git ..."
 # Configures Git.
 HEXO_GIT_DIR=$GITHUB_WORKSPACE/hexo_git_dir
+mkdir -p ${HEXO_GIT_DIR}
+cd ${HEXO_GIT_DIR}
 git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
 git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DIR}
