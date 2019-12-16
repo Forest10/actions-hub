@@ -2,7 +2,7 @@
 FROM node:10
 
 RUN apt update
-RUN apt -yq install rsync openssh-client
+RUN apt -yq install rsync
 LABEL "com.github.actions.name"="Hexo Deploy With CNAME PROVIDE"
 LABEL "com.github.actions.description"="This GitHub action will handle the building and deploying process of hexo project."
 LABEL "com.github.actions.icon"="git-commit"
