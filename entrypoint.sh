@@ -32,6 +32,12 @@ then
 fi
 
 
+if [ -z "$BRANCH" ]
+then
+  echo "You must provide the action with BRANCH in order to deploy."
+  exit 1
+fi
+
 if [ -z "$PERSONAL_TOKEN" ]
 then
   echo "You must provide the action with either a Personal Access Token or the GitHub Token secret in order to deploy."
@@ -71,6 +77,7 @@ git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
 
 git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DIR}
+git checkout ${BRANCH}
 
 
 # rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR
