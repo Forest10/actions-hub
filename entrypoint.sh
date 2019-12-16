@@ -79,9 +79,8 @@ git config user.email "${PUBLISH_EMAIL}"
 git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DIR}
 git fetch
 git checkout -b ${BRANCH}
-git remote set-branches --add origin  ${BRANCH}
+git branch --set-upstream-to=origin/${BRANCH} ${BRANCH}
 git pull
-
 
 # rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR
 echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR'
@@ -99,7 +98,7 @@ git add -A
 git commit -m '哈哈'
 
 echo 'Start push'
-git push --set-upstream origin ${BRANCH}
+git push
 
 echo "Deployment to git succesful!"
 
