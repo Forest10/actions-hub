@@ -85,6 +85,8 @@ touch ${HEXO_PUBLICL_FILE_DIFF_FILE}
 chmod 777 ${HEXO_PUBLICL_FILE_DIFF_FILE}
 git diff --name-only > ${HEXO_PUBLICL_FILE_DIFF_FILE}
 NEED_REWRITE_QINIU_FILE=`cat ${HEXO_PUBLICL_FILE_DIFF_FILE} | xargs`
+echo 'cat ${NEED_REWRITE_QINIU_FILE}'
+cat ${NEED_REWRITE_QINIU_FILE}
 echo 'Start push'
 git push
 
