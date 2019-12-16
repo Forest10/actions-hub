@@ -82,6 +82,7 @@ git add .
 git commit -m '哈哈'
 echo 'git diff  start'
 git diff --name-only > git_diff.txt
+ls
 cat git_diff.txt
 echo 'git diff  end'
 
