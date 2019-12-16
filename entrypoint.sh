@@ -69,6 +69,8 @@ mkdir -p ${HEXO_GIT_DIR}
 cd ${HEXO_GIT_DIR}
 git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
+###修正中文乱码问题
+git config --global core.quotepath false
 git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DIR}
 cd ${HEXO_GIT_DIR}
 git fetch
@@ -87,6 +89,7 @@ echo "HEXO_GIT_DIR ls ok"
 
 HEXO_UPDATE_ZIP_PATH=`pwd`
 HEXO_DIFF_UPDATE_FILE_NAME=hexo_diff_update.zip
+
 git archive -o ${HEXO_DIFF_UPDATE_FILE_NAME} HEAD $(git diff --name-only HEAD"^")
 echo 'Start push'
 git push
