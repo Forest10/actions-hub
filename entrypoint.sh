@@ -82,21 +82,13 @@ echo `date` > date.txt
 git add .
 git commit -m '哈哈'
 
-NOW_TIMESTAMP=`date +%s`
-
-HEXO_UPDATE_ZIP_PATH=${GITHUB_WORKSPACE}/${NOW_TIMESTAMP}
-mkdir -p ${HEXO_UPDATE_ZIP_PATH}
-HEXO_UPDATE_ZIP_NAME=${NOW_TIMESTAMP}.zip
-git diff --name-only HEAD"^" --name-only | xargs zip ${HEXO_UPDATE_ZIP_PATH}/${HEXO_UPDATE_ZIP_NAME}
+HEXO_UPDATE_ZIP_PATH=`pwd`
+HEXO_UPDATE_ZIP_NAME=`date +%s`.zip
+git diff --name-only HEAD"^" --name-only | xargs zip ${HEXO_UPDATE_ZIP_NAME}
 echo 'Start push'
 git push
 
 echo "Deployment to git succesful!"
-
-echo "Start del .git"
-rm -rf .git
-echo "del .git ok!"
-
 
 cd ${HEXO_UPDATE_ZIP_PATH}
 UNZIP_UPDATE_DIR=${HEXO_UPDATE_ZIP_PATH}/${NOW_TIMESTAMP}_update
