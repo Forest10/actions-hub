@@ -79,6 +79,7 @@ git config user.email "${PUBLISH_EMAIL}"
 git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DIR}
 git fetch
 git checkout -b ${BRANCH}
+git remote set-branches --add origin  ${BRANCH}
 git pull
 
 
