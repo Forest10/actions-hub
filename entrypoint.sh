@@ -72,8 +72,9 @@ HEXO_GIT_DIR=$GITHUB_WORKSPACE/hexo_git_dir
 git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
 git clone https://$PERSONAL_TOKEN@github.com/${PUBLISH_REPOSITORY}.git ${HEXO_GIT_DIR}
+git remote set-branches --add origin master
 cd ${HEXO_GIT_DIR}
-git fetch origin
+git fetch
 git pull
 
 
@@ -82,7 +83,7 @@ echo `date` > date.txt
 git add .
 git commit -m '哈哈'
 echo 'git diff  start'
-git diff --stat master..origin/master --name-only > git_diff.txt
+git diff origin/master --name-only > git_diff.txt
 cat git_diff.txt
 echo 'git diff  end exit'
 exit
