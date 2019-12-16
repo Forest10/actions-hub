@@ -83,16 +83,17 @@ git add .
 git commit -m '哈哈'
 
 HEXO_UPDATE_ZIP_PATH=`pwd`
-git diff --name-only HEAD"^" | xargs zip HEXO_DIFF_UPDATE.zip
+HEXO_DIFF_UPDATE_FILE_NAME=hexo_diff_update.zip
+git archive -o ${HEXO_DIFF_UPDATE_FILE_NAME} HEAD $(git diff --name-only HEAD"^")
 echo 'Start push'
 git push
 
 echo "Deployment to git succesful!"
 
 cd ${HEXO_UPDATE_ZIP_PATH}
-UNZIP_UPDATE_DIR=${HEXO_UPDATE_ZIP_PATH}/${NOW_TIMESTAMP}_update
-mkdir ${UNZIP_UPDATE_DIR}
-upzip HEXO_DIFF_UPDATE.zip -d ${UNZIP_UPDATE_DIR}
+UNZIP_HEXO_UPDATE_DIR=${HEXO_UPDATE_ZIP_PATH}/${NOW_TIMESTAMP}_update
+mkdir -p ${UNZIP_HEXO_UPDATE_DIR}
+upzip ${HEXO_DIFF_UPDATE_FILE_NAME} -d ${UNZIP_HEXO_UPDATE_DIR}
 
 echo "回到qshell_home!"
 QSHELL_DIR_PATH=$GITHUB_WORKSPACE/qshell_dir
