@@ -2,7 +2,7 @@
 
 set -e
 
-rsync
+rsync --version
 
 #
 ## check values
