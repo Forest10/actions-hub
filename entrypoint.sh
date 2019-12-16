@@ -84,7 +84,7 @@ git commit -m '哈哈'
 
 HEXO_UPDATE_ZIP_PATH=`pwd`
 HEXO_UPDATE_ZIP_NAME=`date +%s`.zip
-git diff --name-only HEAD"^" --name-only | xargs zip ${HEXO_UPDATE_ZIP_NAME}
+git diff --name-only HEAD"^" | xargs zip ${HEXO_UPDATE_ZIP_NAME}
 echo 'Start push'
 git push
 
