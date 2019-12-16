@@ -113,7 +113,7 @@ echo 'Start run qshell account for use new ak sk'
 
 echo 'Start run qshell upload2'
 ##增量更新上传(外加多线程)
-./qshell qupload2 --overwrite --src-dir=${UNZIP_UPDATE_DIR}/ --bucket=${QINIU_BUCKET} --thread-count 16
+./qshell qupload2 --overwrite --src-dir=${UNZIP_HEXO_UPDATE_DIR}/ --bucket=${QINIU_BUCKET} --thread-count 16
 echo 'done  upload qiniu'
 
 
