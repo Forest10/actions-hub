@@ -78,7 +78,7 @@ git pull
 cp -R ${HEXO_PUBLICL_DIR}/* ${HEXO_GIT_DIR}
 
 echo `date` > date.txt
-git add .
+git add -A
 git commit -m '哈哈'
 echo "HEXO_GIT_DIR ls ..."
 ls
