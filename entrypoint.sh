@@ -54,7 +54,6 @@ npm install
 ./node_modules/hexo/bin/hexo generate
 #mkdir public
 cd $PUBLISH_DIR
-
 HEXO_PUBLICL_DIR=`pwd`
 echo "copy CNAME if exists"
 if [ -n "${CNAME}" ]; then
@@ -76,11 +75,12 @@ git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DI
 
 # rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR
 echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR'
-rsync -av ${HEXO_PUBLICL_DIR} ${HEXO_GIT_DIR}
+rsync -av ${HEXO_PUBLICL_DIR}/* ${HEXO_GIT_DIR}
 echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR done'
 
-cd ${HEXO_GIT_DIR}
 
+cd ${HEXO_GIT_DIR}
+ls
 
 
 git fetch
@@ -97,7 +97,6 @@ echo "Deployment to git succesful!"
 
 
 echo "do  rsync diff file to HEXO_UPDATE_DIR!"
-git diff HEAD  HEAD~1 --name-only
 
 
 HEXO_UPDATE_DIR=$GITHUB_WORKSPACE/hexo_update_dir_in_action
