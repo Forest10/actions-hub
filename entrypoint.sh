@@ -80,6 +80,10 @@ cp -R ${HEXO_PUBLICL_DIR}/ ${HEXO_GIT_DIR}
 echo `date` > date.txt
 git add .
 git commit -m '哈哈'
+echo 'git diff  start'
+git diff --name-only
+echo 'git diff  end'
+
 HEXO_PUBLICL_FILE_DIFF_FILE=`date +%s`.txt
 touch ${HEXO_PUBLICL_FILE_DIFF_FILE}
 chmod 777 ${HEXO_PUBLICL_FILE_DIFF_FILE}
