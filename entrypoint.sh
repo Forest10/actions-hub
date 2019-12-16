@@ -107,9 +107,12 @@ echo "do  rsync diff file to HEXO_UPDATE_DIR!"
 HEXO_UPDATE_DIR=$GITHUB_WORKSPACE/hexo_update_dir_in_action
 mkdir -p ${HEXO_UPDATE_DIR}
 GIT_DIFF_RSYNC_FILE_NAME=git_diff_rsync.txt
+GIT_DIFF_RSYNC_FILE_NAME_WITH_OUT_QUOT=git_diff_rsync_witout_quot.txt
 git diff HEAD  HEAD~1 --name-only > ${GIT_DIFF_RSYNC_FILE_NAME}
 
-for i in `cat "${GIT_DIFF_RSYNC_FILE_NAME}"`;do rsync  -Rav ${i} ${HEXO_UPDATE_DIR};done
+for j in `cat "${GIT_DIFF_RSYNC_FILE_NAME}"`;do echo $j | sed 's/\"//g' >> ${GIT_DIFF_RSYNC_FILE_NAME_WITH_OUT_QUOT};done
+
+for i in `cat "${GIT_DIFF_RSYNC_FILE_NAME_WITH_OUT_QUOT}"`;do rsync  -Rav ${i} ${HEXO_UPDATE_DIR};done
 echo "do  rsync diff file to HEXO_UPDATE_DIR done!"
 
 
