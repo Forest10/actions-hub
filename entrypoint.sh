@@ -32,11 +32,6 @@ then
   exit 1
 fi
 
-if [ -z "$BRANCH" ]
-then
-  echo "You must provide the action with a branch name it should deploy to, for example master."
-  exit 1
-fi
 
 if [ -z "$PERSONAL_TOKEN" ]
 then
@@ -76,7 +71,6 @@ cd ${HEXO_GIT_DIR}
 git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
 git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DIR}
-git remote set-branches --add origin master
 cd ${HEXO_GIT_DIR}
 git fetch
 git pull
