@@ -75,6 +75,7 @@ cd ${HEXO_GIT_DIR}
 git fetch
 git pull
 
+
 cp -R ${HEXO_PUBLICL_DIR}/ ${HEXO_GIT_DIR}
 echo `date` > date.txt
 git add .
