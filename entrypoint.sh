@@ -77,7 +77,9 @@ git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
 
 git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DIR}
-git checkout ${BRANCH}
+git fetch
+git checkout -b ${BRANCH}
+git pull
 
 
 # rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR
@@ -90,15 +92,13 @@ cd ${HEXO_GIT_DIR}
 ls
 
 
-git fetch
-git pull
 
 echo `date` > date.txt
 git add -A
 git commit -m '哈哈'
 
 echo 'Start push'
-git push
+git push --set-upstream origin ${BRANCH}
 
 echo "Deployment to git succesful!"
 
