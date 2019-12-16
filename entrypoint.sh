@@ -58,6 +58,7 @@ cd $GITHUB_WORKSPACE
 #echo "Generate file ..."
 #./node_modules/hexo/bin/hexo generate
 #
+mkdir ./public
 
 cd $PUBLISH_DIR
 HEXO_PUBLICL_DIR=`pwd`
