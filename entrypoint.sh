@@ -47,15 +47,12 @@ echo "Deploy to ${PRO_REPOSITORY}"
 cd $GITHUB_WORKSPACE
 #
 #echo "npm install ..."
-#npm install
-#
-#
+npm install
 #echo "Clean folder ..."
-#./node_modules/hexo/bin/hexo clean
-#
+./node_modules/hexo/bin/hexo clean
 #echo "Generate file ..."
-#./node_modules/hexo/bin/hexo generate
-mkdir public
+./node_modules/hexo/bin/hexo generate
+#mkdir public
 cd $PUBLISH_DIR
 
 HEXO_PUBLICL_DIR=`pwd`
