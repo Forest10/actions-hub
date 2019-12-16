@@ -76,7 +76,7 @@ git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DI
 
 # rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR
 echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR'
-rsync ${HEXO_PUBLICL_DIR} ${HEXO_GIT_DIR}
+rsync -av ${HEXO_PUBLICL_DIR} ${HEXO_GIT_DIR}
 echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR done'
 
 cd ${HEXO_GIT_DIR}
