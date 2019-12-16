@@ -75,7 +75,7 @@ git fetch
 git pull
 
 
-cp -R ${HEXO_PUBLICL_DIR}/ ${HEXO_GIT_DIR}
+cp -R ${HEXO_PUBLICL_DIR}/* ${HEXO_GIT_DIR}
 
 echo `date` > date.txt
 git add .
@@ -83,6 +83,12 @@ git commit -m '哈哈'
 echo "HEXO_GIT_DIR ls ..."
 ls
 echo "HEXO_GIT_DIR ls ok"
+echo "HEXO_GIT_DIR cd public  ls ..."
+cd public/
+ls
+cd ../
+echo "HEXO_GIT_DIR cd ../ ls ok"
+
 
 HEXO_UPDATE_ZIP_PATH=`pwd`
 HEXO_DIFF_UPDATE_FILE_NAME=hexo_diff_update.zip
