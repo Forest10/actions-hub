@@ -83,11 +83,6 @@ git commit -m '哈哈'
 echo "HEXO_GIT_DIR ls ..."
 ls
 echo "HEXO_GIT_DIR ls ok"
-echo "HEXO_GIT_DIR cd public  ls ..."
-cd public/
-ls
-cd ../
-echo "HEXO_GIT_DIR cd ../ ls ok"
 
 
 HEXO_UPDATE_ZIP_PATH=`pwd`
