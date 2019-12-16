@@ -79,7 +79,9 @@ cp -R ${HEXO_PUBLICL_DIR}/ ${HEXO_GIT_DIR}
 echo `date` > date.txt
 git add .
 git commit -m '哈哈'
-
+HEXO_PUBLICL_FILE_DIFF_FILE=../`date +%s`.txt
+NEED_REWRITE_QINIU_FILE=git diff origin/master... --name-only > ../${HEXO_PUBLICL_FILE_DIFF_FILE} && cat
+${HEXO_PUBLICL_FILE_DIFF_FILE} | xargs
 echo 'Start push'
 git push
 
@@ -117,7 +119,7 @@ fi
 
 echo 'Start run qshell upload2'
 ##增量更新上传(外加多线程)
-./qshell qupload2  --overwrite --src-dir=${HEXO_PUBLICL_DIR}/ --bucket=${QINIU_BUCKET}  --rescan-local --thread-count 16 --check-size
+./qshell qupload2  --overwrite --src-dir=${HEXO_PUBLICL_DIR}/ --bucket=${QINIU_BUCKET} --rescan-local --thread-count16 --file-list ${NEED_REWRITE_QINIU_FILE}
 echo 'done  upload qiniu'
 echo 'qiniu upload2 cache to git'
 ##假如不报错 就把当前的变化直接传送到git上
