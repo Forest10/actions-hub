@@ -81,15 +81,12 @@ cp -R ${HEXO_PUBLICL_DIR}/ ${HEXO_GIT_DIR}
 echo `date` > date.txt
 git add .
 git commit -m '哈哈'
-echo 'git diff  start'
-git diff --name-only HEAD"^" --name-only > git_diff.txt
-cat git_diff.txt
-echo 'git diff  end exit'
+
 
 HEXO_PUBLICL_FILE_DIFF_FILE=`date +%s`.txt
 touch ${HEXO_PUBLICL_FILE_DIFF_FILE}
 chmod 777 ${HEXO_PUBLICL_FILE_DIFF_FILE}
-git diff --name-only > ${HEXO_PUBLICL_FILE_DIFF_FILE}
+git diff --name-only HEAD"^" --name-only > ${HEXO_PUBLICL_FILE_DIFF_FILE}
 echo 'cat ${HEXO_PUBLICL_FILE_DIFF_FILE}'
 cat ${HEXO_PUBLICL_FILE_DIFF_FILE}
 NEED_REWRITE_QINIU_FILE=`cat ${HEXO_PUBLICL_FILE_DIFF_FILE} | xargs`
