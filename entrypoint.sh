@@ -81,7 +81,8 @@ echo `date` > date.txt
 git add .
 git commit -m '哈哈'
 echo 'git diff  start'
-git diff --name-only
+git diff --name-only > git_diff.txt
+cat git_diff.txt
 echo 'git diff  end'
 
 HEXO_PUBLICL_FILE_DIFF_FILE=`date +%s`.txt
