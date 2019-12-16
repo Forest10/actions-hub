@@ -83,9 +83,15 @@ git push
 
 echo "Deployment to git succesful!"
 
-HEXO_UPDATE_DIR=$GITHUB_WORKSPACE/hexo_update_dir_in_action
 
+echo "do  rsync diff file to HEXO_UPDATE_DIR!"
+
+HEXO_UPDATE_DIR=$GITHUB_WORKSPACE/hexo_update_dir_in_action
+mkdir -p ${HEXO_UPDATE_DIR}
 for i in $(git diff HEAD  HEAD~1 --name-only);do rsync  -R ${i} ${HEXO_UPDATE_DIR};done
+echo "do  rsync diff file to HEXO_UPDATE_DIR done!"
+
+
 echo "回到qshell_home!"
 QSHELL_DIR_PATH=$GITHUB_WORKSPACE/qshell_dir
 mkdir -p ${QSHELL_DIR_PATH}
