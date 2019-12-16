@@ -81,8 +81,8 @@ git fetch
 git checkout -b ${BRANCH}
 git branch --set-upstream-to=origin/${BRANCH} ${BRANCH}
 git pull
-
 rm -rf *
+
 # rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR
 echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR'
 cp -R ${HEXO_PUBLICL_DIR}/* ${HEXO_GIT_DIR}
@@ -90,9 +90,6 @@ echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR done'
 
 
 cd ${HEXO_GIT_DIR}
-ls
-
-
 
 echo `date` > date.txt
 git add -A
@@ -111,35 +108,36 @@ HEXO_UPDATE_DIR=$GITHUB_WORKSPACE/hexo_update_dir_in_action
 mkdir -p ${HEXO_UPDATE_DIR}
 GIT_DIFF_RSYNC_FILE_NAME=git_diff_rsync.txt
 git diff HEAD  HEAD~1 --name-only > ${GIT_DIFF_RSYNC_FILE_NAME}
-
-for i in `cat "${GIT_DIFF_RSYNC_FILE_NAME}"`;do echo ${i} && rsync  -R ${i} ${HEXO_UPDATE_DIR};done
-echo "do  rsync diff file to HEXO_UPDATE_DIR done!"
-
-
-echo "回到qshell_home!"
-QSHELL_DIR_PATH=$GITHUB_WORKSPACE/qshell_dir
-mkdir -p ${QSHELL_DIR_PATH}
-cd ${QSHELL_DIR_PATH}
-echo "Start setup qshell!"
-wget http://devtools.qiniu.com/qshell-linux-x64-v2.4.0.zip -O qshell.zip
-unzip qshell.zip
-mv qshell-linux-x64-v2.4.0 qshell
-chmod u+x qshell
-echo "setup qshell done!"
-
-
-cd ${QSHELL_DIR_PATH}
-echo 'Start run qshell account for use new ak sk'
-./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
-
-echo 'Start run qshell upload2'
-##增量更新上传(外加多线程)
-./qshell qupload2 --overwrite --src-dir=${HEXO_UPDATE_DIR}/ --bucket=${QINIU_BUCKET} --thread-count 16
-echo 'done  upload qiniu'
-
-
-
-
-
+for i in `cat "${GIT_DIFF_RSYNC_FILE_NAME}"`;do echo ${i};done
+#
+#for i in `cat "${GIT_DIFF_RSYNC_FILE_NAME}"`;do echo ${i} && rsync  -R ${i} ${HEXO_UPDATE_DIR};done
+#echo "do  rsync diff file to HEXO_UPDATE_DIR done!"
+#
+#
+#echo "回到qshell_home!"
+#QSHELL_DIR_PATH=$GITHUB_WORKSPACE/qshell_dir
+#mkdir -p ${QSHELL_DIR_PATH}
+#cd ${QSHELL_DIR_PATH}
+#echo "Start setup qshell!"
+#wget http://devtools.qiniu.com/qshell-linux-x64-v2.4.0.zip -O qshell.zip
+#unzip qshell.zip
+#mv qshell-linux-x64-v2.4.0 qshell
+#chmod u+x qshell
+#echo "setup qshell done!"
+#
+#
+#cd ${QSHELL_DIR_PATH}
+#echo 'Start run qshell account for use new ak sk'
+#./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
+#
+#echo 'Start run qshell upload2'
+###增量更新上传(外加多线程)
+#./qshell qupload2 --overwrite --src-dir=${HEXO_UPDATE_DIR}/ --bucket=${QINIU_BUCKET} --thread-count 16
+#echo 'done  upload qiniu'
+#
+#
+#
+#
+#
 
 
