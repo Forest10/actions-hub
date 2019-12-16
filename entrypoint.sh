@@ -70,6 +70,7 @@ echo "Config git ..."
 
 
 # Configures Git.
+git config --global i18n.commitencoding utf-8
 HEXO_GIT_DIR=$GITHUB_WORKSPACE/hexo_git_dir
 mkdir -p ${HEXO_GIT_DIR}
 cd ${HEXO_GIT_DIR}
