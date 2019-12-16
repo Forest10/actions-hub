@@ -82,6 +82,7 @@ git checkout -b ${BRANCH}
 git branch --set-upstream-to=origin/${BRANCH} ${BRANCH}
 git pull
 
+rm -rf *
 # rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR
 echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR'
 cp -R ${HEXO_PUBLICL_DIR}/* ${HEXO_GIT_DIR}
