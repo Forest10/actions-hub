@@ -69,38 +69,23 @@ mkdir -p ${HEXO_GIT_DIR}
 cd ${HEXO_GIT_DIR}
 git config user.name "${PUBLISH_USER_NAME}"
 git config user.email "${PUBLISH_EMAIL}"
-###修正中文乱码问题
-git config --global core.quotepath false
 git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DIR}
 cd ${HEXO_GIT_DIR}
 git fetch
 git pull
 
-
-cp -R ${HEXO_PUBLICL_DIR}/* ${HEXO_GIT_DIR}
-
 echo `date` > date.txt
 git add -A
 git commit -m '哈哈'
-echo "HEXO_GIT_DIR ls ..."
-ls
-echo "HEXO_GIT_DIR ls ok"
 
-
-HEXO_UPDATE_ZIP_PATH=`pwd`
-HEXO_DIFF_UPDATE_FILE_NAME=hexo_diff_update.zip
-
-git archive -o ${HEXO_DIFF_UPDATE_FILE_NAME} HEAD $(git diff --name-only HEAD"^")
 echo 'Start push'
 git push
 
 echo "Deployment to git succesful!"
 
-cd ${HEXO_UPDATE_ZIP_PATH}
-UNZIP_HEXO_UPDATE_DIR=${HEXO_UPDATE_ZIP_PATH}/${NOW_TIMESTAMP}_update
-mkdir -p ${UNZIP_HEXO_UPDATE_DIR}
-unzip ${HEXO_DIFF_UPDATE_FILE_NAME} -d ${UNZIP_HEXO_UPDATE_DIR}
+HEXO_UPDATE_DIR=$GITHUB_WORKSPACE/hexo_update_dir_in_action
 
+for i in $(git diff HEAD  HEAD~1 --name-only);do rsync  -R ${i} ${HEXO_UPDATE_DIR};done
 echo "回到qshell_home!"
 QSHELL_DIR_PATH=$GITHUB_WORKSPACE/qshell_dir
 mkdir -p ${QSHELL_DIR_PATH}
@@ -119,7 +104,7 @@ echo 'Start run qshell account for use new ak sk'
 
 echo 'Start run qshell upload2'
 ##增量更新上传(外加多线程)
-./qshell qupload2 --overwrite --src-dir=${UNZIP_HEXO_UPDATE_DIR}/ --bucket=${QINIU_BUCKET} --thread-count 16
+./qshell qupload2 --overwrite --src-dir=${HEXO_UPDATE_DIR}/ --bucket=${QINIU_BUCKET} --thread-count 16
 echo 'done  upload qiniu'
 
 
