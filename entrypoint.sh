@@ -2,46 +2,42 @@
 
 set -e
 
-rsync --version
-
-
 # check values
+
+if [ -z "$PUBLISH_DIR" ]; then
+  echo "You must provide the action with the folder path in the repository where your compiled page generate at, example public."
+  exit 1
+fi
+
+if [ -z "$BRANCH" ]; then
+  echo "You must provide the action with BRANCH in order to deploy."
+  exit 1
+fi
+
+if [ -z "$PERSONAL_TOKEN" ]; then
+  echo "You must provide the action with either a Personal Access Token or the GitHub Token secret in order to deploy."
+  exit 1
+fi
+
+#set value
+
 if [ -n "${USER_NAME}" ]; then
-    PUBLISH_USER_NAME=${USER_NAME}
+  PUBLISH_USER_NAME=${USER_NAME}
 else
-    PUBLISH_USER_NAME="Forest10"
+  PUBLISH_USER_NAME="Forest10"
 fi
 if [ -n "${EMAIL}" ]; then
-    PUBLISH_EMAIL=${USER_NAME}
+  PUBLISH_EMAIL=${USER_NAME}
 else
-    PUBLISH_EMAIL="github.forest10@gmail.com"
+  PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
 
 ACTION_QSHELL_HOME=~/.qshell
 
 if [ -n "${PUBLISH_REPOSITORY}" ]; then
-    PRO_REPOSITORY=${PUBLISH_REPOSITORY}
+  PRO_REPOSITORY=${PUBLISH_REPOSITORY}
 else
-    PRO_REPOSITORY=${GITHUB_REPOSITORY}
-fi
-
-if [ -z "$PUBLISH_DIR" ]
-then
-  echo "You must provide the action with the folder path in the repository where your compiled page generate at, example public."
-  exit 1
-fi
-
-
-if [ -z "$BRANCH" ]
-then
-  echo "You must provide the action with BRANCH in order to deploy."
-  exit 1
-fi
-
-if [ -z "$PERSONAL_TOKEN" ]
-then
-  echo "You must provide the action with either a Personal Access Token or the GitHub Token secret in order to deploy."
-  exit 1
+  PRO_REPOSITORY=${GITHUB_REPOSITORY}
 fi
 
 REPOSITORY_PATH="https://x-access-token:${PERSONAL_TOKEN}@github.com/${PRO_REPOSITORY}.git"
@@ -60,14 +56,12 @@ npm install
 ./node_modules/hexo/bin/hexo generate
 #mkdir public
 cd $PUBLISH_DIR
-HEXO_PUBLICL_DIR=`pwd`
+HEXO_PUBLICL_DIR=$(pwd)
 echo "copy CNAME if exists"
 if [ -n "${CNAME}" ]; then
-    echo ${CNAME} > CNAME
+  echo ${CNAME} >CNAME
 fi
 echo "Config git ..."
-
-
 
 # Configures Git.
 git config --global i18n.commitencoding utf-8
@@ -79,7 +73,9 @@ git config user.email "${PUBLISH_EMAIL}"
 
 git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DIR}
 git fetch
-git checkout -b ${BRANCH}
+if [ ${BRANCH} != 'master' ]; then
+  git checkout -b ${BRANCH}
+fi
 git branch --set-upstream-to=origin/${BRANCH} ${BRANCH}
 git pull
 
@@ -88,10 +84,9 @@ echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR'
 cp -R ${HEXO_PUBLICL_DIR}/* ${HEXO_GIT_DIR}
 echo 'rsync HEXO_PUBLICL_DIR -> HEXO_GIT_DIR done'
 
-
 cd ${HEXO_GIT_DIR}
 
-echo `date` > date.txt
+echo $(date) >date.txt
 git add -A
 git commit -m '哈哈'
 
@@ -100,21 +95,18 @@ git push
 
 echo "Deployment to git succesful!"
 
-
 echo "do  rsync diff file to HEXO_UPDATE_DIR!"
-
 
 HEXO_UPDATE_DIR=$GITHUB_WORKSPACE/hexo_update_dir_in_action
 mkdir -p ${HEXO_UPDATE_DIR}
 GIT_DIFF_RSYNC_FILE_NAME=git_diff_rsync.txt
 GIT_DIFF_RSYNC_FILE_NAME_WITH_OUT_QUOT=git_diff_rsync_witout_quot.txt
-git diff HEAD  HEAD~1 --name-only > ${GIT_DIFF_RSYNC_FILE_NAME}
+git diff HEAD HEAD~1 --name-only >${GIT_DIFF_RSYNC_FILE_NAME}
 
-for j in `cat "${GIT_DIFF_RSYNC_FILE_NAME}"`;do echo $j | sed 's/\"//g' >> ${GIT_DIFF_RSYNC_FILE_NAME_WITH_OUT_QUOT};done
+for j in $(cat "${GIT_DIFF_RSYNC_FILE_NAME}"); do echo $j | sed 's/\"//g' >>${GIT_DIFF_RSYNC_FILE_NAME_WITH_OUT_QUOT}; done
 
-for i in `cat "${GIT_DIFF_RSYNC_FILE_NAME_WITH_OUT_QUOT}"`;do rsync  -Rav ${i} ${HEXO_UPDATE_DIR};done
+for i in $(cat "${GIT_DIFF_RSYNC_FILE_NAME_WITH_OUT_QUOT}"); do rsync -Rav ${i} ${HEXO_UPDATE_DIR}; done
 echo "do  rsync diff file to HEXO_UPDATE_DIR done!"
-
 
 echo "回到qshell_home!"
 QSHELL_DIR_PATH=$GITHUB_WORKSPACE/qshell_dir
@@ -127,7 +119,6 @@ mv qshell-linux-x64-v2.4.0 qshell
 chmod u+x qshell
 echo "setup qshell done!"
 
-
 cd ${QSHELL_DIR_PATH}
 echo 'Start run qshell account for use new ak sk'
 ./qshell account ${QINIU_AK} ${QINIU_SK} ${QINIU_USER_NAME}
@@ -136,10 +127,3 @@ echo 'Start run qshell upload2'
 ##增量更新上传(外加多线程)
 ./qshell qupload2 --overwrite --src-dir=${HEXO_UPDATE_DIR}/ --bucket=${QINIU_BUCKET} --thread-count 16
 echo 'done  upload qiniu'
-
-
-
-
-
-
-
