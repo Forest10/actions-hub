@@ -75,6 +75,8 @@ git clone https://$PERSONAL_TOKEN@github.com/${PRO_REPOSITORY}.git ${HEXO_GIT_DI
 git fetch
 if [ ${BRANCH} != 'master' ]; then
   git checkout -b ${BRANCH}
+else
+  echo 'use master branch'
 fi
 git branch --set-upstream-to=origin/${BRANCH} ${BRANCH}
 git pull
