@@ -38,7 +38,7 @@ else
 fi
 git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_REF}  giteeTmp
 
-git clone https://${PRIVATE_GITHUB_TOKEN}@${GITHUB_REF}  githubTmp
+git clone https://${PRIVATE_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git githubTmp
 
 
 cd ./githubTmp
