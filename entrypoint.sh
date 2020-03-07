@@ -8,8 +8,8 @@ if [ -z "${GITHUB_REPOSITORY}" ]; then
     echo "You must provide the action with GITHUB_REPOSITORY in order to deploy."
     exit 1
 fi
-if [ -z "${OTHERGITEE_HTTPS_REF}" ]; then
-    echo "You must provide the action with GITEE_REF in order to deploy.like xxx.com/OTHER_GIT_USERNAME/YYY.git"
+if [ -z "${OTHERGIT_HTTPS_REF}" ]; then
+    echo "You must provide the action with OTHERGIT_HTTPS_REF in order to deploy.like xxx.com/OTHER_GIT_USERNAME/YYY.git"
     exit 1
 fi
 if [ -z "${PRIVATE_GITHUB_TOKEN}" ]; then
@@ -33,7 +33,7 @@ else
     PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
 git clone https://${PRIVATE_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git githubTmp
-git clone https://${OTHER_GIT_USERNAME}:${OTHER_GIT_TOKEN}@${GITEE_REF}  otherGitTmp
+git clone https://${OTHER_GIT_USERNAME}:${OTHER_GIT_TOKEN}@${OTHERGIT_HTTPS_REF}  otherGitTmp
 
 
 
