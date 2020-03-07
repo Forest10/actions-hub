@@ -1,0 +1,9 @@
+name: ''
+description: ''
+author: 'Forest10'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'git-commit'
+  color: 'orange'
