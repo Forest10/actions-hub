@@ -36,11 +36,7 @@ if [ -n "${EMAIL}" ]; then
 else
     PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
-echo 'githubTmp 1'
 git clone https://${PRIVATE_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git githubTmp
-echo 'githubTmp 2'
-
-
 git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_REF}  giteeTmp
 
 
