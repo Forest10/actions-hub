@@ -37,6 +37,7 @@ else
     PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
 git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_REF}  giteeTmp
+
 git clone https://${PRIVATE_GITHUB_TOKEN}@${GITHUB_REF}  githubTmp
 
 
