@@ -36,9 +36,9 @@ if [ -n "${EMAIL}" ]; then
 else
     PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
+git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_REF}  giteeTmp
 git clone https://x-access-token:${PRIVATE_GITHUB_TOKEN}@${GITHUB_REF}  githubTmp
 
-git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_REF}  giteeTmp
 
 cd ./githubTmp
 git pull
