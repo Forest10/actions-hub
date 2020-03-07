@@ -4,20 +4,20 @@ set -e
 
 
 # check values
-if [ -n "${GITHUB_REF}" ]; then
+if [ -z "${GITHUB_REF}" ]; then
     echo "You must provide the action with GITHUB_REF in order to deploy."
     exit 1
 fi
-if [ -n "${GITEE_REF}" ]; then
+if [ -z "${GITEE_REF}" ]; then
     echo "You must provide the action with GITEE_REF in order to deploy."
     exit 1
 fi
 
-if [ -n "${GITEE_USERNAME}" ]; then
+if [ -z "${GITEE_USERNAME}" ]; then
     echo "You must provide the action with GITEE_USERNAME in order to deploy."
     exit 1
 fi
-if [ -n "${GITEE_TOKEN}" ]; then
+if [ -z "${GITEE_TOKEN}" ]; then
     echo "You must provide the action with GITEE_TOKEN in order to deploy."
     exit 1
 fi
@@ -38,7 +38,7 @@ git pull
 cp -R  ../githubTmp/* ./
 # 设置用户名mail
 git config user.name "Forest10"
-git config user.email "github.forest10@gmail.com"
+git config user.email ${PUBLISH_EMAIL}
 # 进入gitee 开始操作
 git add .
 git commit -m "Sync From GitHub By sync-2-gitee action"
