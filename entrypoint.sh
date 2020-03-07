@@ -28,8 +28,9 @@ if [ -n "${EMAIL}" ]; then
 else
     PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
-git clone ${GITHUB_REF} githubTmp
-git clone ${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_REF}  giteeTmp
+git clone https://${GITHUB_REF} githubTmp
+git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_REF}  giteeTmp
+
 cd ./githubTmp
 git pull
 cd ../giteeTmp
@@ -39,8 +40,9 @@ cp -R  ../githubTmp/* ./
 # 设置用户名mail
 git config user.name "Forest10"
 git config user.email ${PUBLISH_EMAIL}
+echo 'date' > today.txt
 # 进入gitee 开始操作
 git add .
-git commit -m "Sync From GitHub By sync-2-gitee action"
+git commit -m "Sync From GitHub By sync-2-gitee action"t
 # push to GITEE
 git push
