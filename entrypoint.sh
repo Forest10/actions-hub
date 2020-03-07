@@ -8,8 +8,16 @@ if [ -z "${GITHUB_REF}" ]; then
     echo "You must provide the action with GITHUB_REF in order to deploy."
     exit 1
 fi
+if [ -z "${GITHUB_USERNAME}" ]; then
+    echo "You must provide the action with GITHUB_USERNAME in order to deploy."
+    exit 1
+fi
 if [ -z "${GITEE_REF}" ]; then
     echo "You must provide the action with GITEE_REF in order to deploy."
+    exit 1
+fi
+if [ -z "${PRIVATE_GITHUB_TOKEN}" ]; then
+    echo "You must provide the action with PRIVATE_GITHUB_TOKEN in order to deploy."
     exit 1
 fi
 
@@ -28,7 +36,7 @@ if [ -n "${EMAIL}" ]; then
 else
     PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
-git clone https://${GITHUB_REF} githubTmp
+git clone https://${GITHUB_USERNAME}:${PRIVATE_GITHUB_TOKEN}@${GITHUB_REF}  githubTmp
 git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_REF}  giteeTmp
 
 cd ./githubTmp
