@@ -1,5 +1,5 @@
-name: ''
-description: ''
+name: 'sync-2-gitee'
+description: 'copy your github code to gitee'
 author: 'Forest10'
 runs:
   using: 'docker'
