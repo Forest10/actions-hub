@@ -35,6 +35,8 @@ git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_HTTPS_REF} giteeTmp
 # 设置用户名mail
 git config user.name "Forest10"
 git config user.email ${PUBLISH_EMAIL}
+## 进入GitHubtmp
+cd ./githubTmp
 ###获取当前分支名称
 nowBranch='git symbolic-ref --short -q HEAD'
 ##如果是master
