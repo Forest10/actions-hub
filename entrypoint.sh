@@ -53,8 +53,8 @@ if [ "$githubNowBranch"x = "master"x ]; then
     git checkout ${branchName}
     git pull
     cd ../giteeTmp
-    # shellcheck disable=SC2081
-    if [ $giteeBranchArray == *$branchName* ]; then
+    # POSIX
+    if [[ $giteeBranchArray = *$branchName* ]]; then
         git checkout ${branchName}
     else
         git checkout -b ${branchName}
