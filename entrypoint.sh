@@ -32,22 +32,31 @@ else
 fi
 git clone https://${PRIVATE_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git githubTmp
 git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_HTTPS_REF} giteeTmp
-## 进入GitHubtmp
-cd ./githubTmp
+cd ./giteeTmp
 # 设置用户名mail
 git config user.name "Forest10"
 git config user.email ${PUBLISH_EMAIL}
-###获取当前分支名称
-nowBranch=`git symbolic-ref --short -q HEAD`
+git fetch
+giteeBranchArray=`git branch -r | grep -v -- '->' | cut -f 2 -d "/"`
+## 进入GitHubtmp
+cd ../githubTmp
+git fetch
+###获取github当前分支名称
+githubNowBranch=`git symbolic-ref --short -q HEAD`
 ##如果是master
-if [ "$nowBranch"x = "master"x ]; then
+if [ "$githubNowBranch"x = "master"x ]; then
   echo 'github now in master'
   ###获取所有分支
   for b in $(git branch -r | grep -v -- '->'); do
-    branch=${b#*/}
-    git checkout branch
+    branchName=${b#*/}
+    git checkout ${branchName}
     git pull
     cd ../giteeTmp
+    if [[ $giteeBranchArray == *$branchName* ]]; then
+        git checkout ${branchName}
+    else
+        git checkout -b ${branchName}
+    fi
     git pull
     # 把github的文件全量复制到otherGitTmp中
     cp -R ../githubTmp/* ./
@@ -56,13 +65,10 @@ if [ "$nowBranch"x = "master"x ]; then
     git add .
     git commit -m "Sync From GitHub By sync-2-gitee action"
     # push to gitee
-    git push
+    git push --set-upstream origin ${branchName}
+    cd ../githubTmp
   done
  exit 1;
-fi
-
-if [  ]; then
-
 fi
 
 cd ./githubTmp
@@ -77,3 +83,5 @@ git add .
 git commit -m "Sync From GitHub By sync-2-gitee action"
 # push to gitee
 git push
+
+git checkout -b branch_name
