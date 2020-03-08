@@ -38,6 +38,7 @@ git config user.name "Forest10"
 git config user.email ${PUBLISH_EMAIL}
 git fetch
 giteeBranchArray=`git branch -r | grep -v -- '->' | cut -f 2 -d "/"`
+echo "giteeBranchArray": ${giteeBranchArray}
 ## 进入GitHubtmp
 cd ../githubTmp
 git fetch
@@ -52,7 +53,8 @@ if [ "$githubNowBranch"x = "master"x ]; then
     git checkout ${branchName}
     git pull
     cd ../giteeTmp
-    if [[ $giteeBranchArray == *$branchName* ]]; then
+    # shellcheck disable=SC2081
+    if [ $giteeBranchArray == *$branchName* ]; then
         git checkout ${branchName}
     else
         git checkout -b ${branchName}
