@@ -56,10 +56,10 @@ if [ "$githubNowBranch"x = "master"x ]; then
     # POSIX
     if [[ $giteeBranchArray == *$branchName* ]]; then
         git checkout ${branchName}
+        git branch --set-upstream-to=origin/${branchName} ${branchName}
     else
         git checkout -b ${branchName}
     fi
-    git branch --set-upstream-to=origin/${branchName} ${branchName}
     git pull
     # 把github的文件全量复制到otherGitTmp中
     cp -R ../githubTmp/* ./
