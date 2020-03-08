@@ -47,7 +47,7 @@ cp -R  ../githubTmp/* ./
 git config user.name "Forest10"
 git config user.email ${PUBLISH_EMAIL}
 # 进入 other git 开始操作
-echo 'date' >> today.txt
+echo `date` >> today.txt
 git add .
 git commit -m "Sync From GitHub By sync-2-gitee action"
 # push to gitee
