@@ -57,7 +57,7 @@ if [ ${nowBranch} == 'master' ]; then
     # push to gitee
     git push
   done
-
+ exit 1;
 fi
 
 cd ./githubTmp
