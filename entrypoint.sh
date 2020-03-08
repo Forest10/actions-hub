@@ -40,7 +40,7 @@ git config user.email ${PUBLISH_EMAIL}
 ###获取当前分支名称
 nowBranch=`git symbolic-ref --short -q HEAD`
 ##如果是master
-if [ ${nowBranch} == 'master' ]; then
+if [ "$nowBranch"x = "master"x ]; then
   echo 'github now in master'
   ###获取所有分支
   for b in $(git branch -r | grep -v -- '->'); do
@@ -59,6 +59,10 @@ if [ ${nowBranch} == 'master' ]; then
     git push
   done
  exit 1;
+fi
+
+if [  ]; then
+
 fi
 
 cd ./githubTmp
