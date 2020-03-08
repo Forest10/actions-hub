@@ -37,13 +37,13 @@ cd ./giteeTmp
 git config user.name "Forest10"
 git config user.email ${PUBLISH_EMAIL}
 git fetch
-giteeBranchArray=`git branch -r | grep -v -- '->' | cut -f 2 -d "/"`
+giteeBranchArray=$(git branch -r | grep -v -- '->' | cut -f 2 -d "/")
 echo "giteeBranchArray": ${giteeBranchArray}
 ## 进入GitHubtmp
 cd ../githubTmp
 git fetch
 ###获取github当前分支名称
-githubNowBranch=`git symbolic-ref --short -q HEAD`
+githubNowBranch=$(git symbolic-ref --short -q HEAD)
 ##如果是master
 if [ "$githubNowBranch"x = "master"x ]; then
   echo 'github now in master'
@@ -55,10 +55,10 @@ if [ "$githubNowBranch"x = "master"x ]; then
     cd ../giteeTmp
     # POSIX
     if [[ $giteeBranchArray == *$branchName* ]]; then
-        git checkout ${branchName}
-        git branch --set-upstream-to=origin/${branchName} ${branchName}
+      git checkout ${branchName}
+      git branch --set-upstream-to=origin/${branchName} ${branchName}
     else
-        git checkout -b ${branchName}
+      git checkout -b ${branchName}
     fi
     git pull
     # 把github的文件全量复制到otherGitTmp中
@@ -71,7 +71,7 @@ if [ "$githubNowBranch"x = "master"x ]; then
     git push --set-upstream origin ${branchName}
     cd ../githubTmp
   done
- exit 1;
+  exit 1
 fi
 
 cd ./githubTmp
