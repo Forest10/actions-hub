@@ -59,6 +59,7 @@ if [ "$githubNowBranch"x = "master"x ]; then
     else
         git checkout -b ${branchName}
     fi
+    git branch --set-upstream-to=origin/${branchName} ${branchName}
     git pull
     # 把github的文件全量复制到otherGitTmp中
     cp -R ../githubTmp/* ./
