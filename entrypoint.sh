@@ -5,11 +5,11 @@ set -e
 
 # check values
 if [ -z "${GITHUB_REPOSITORY}" ]; then
-    echo "You must provide the action with GITHUB_REPOSITORY in order to deploy."
+    echo "You must provide the action with GITHUB_REPOSITORY in order to deploy. like Forest10/test"
     exit 1
 fi
-if [ -z "${OTHERGIT_HTTPS_REF}" ]; then
-    echo "You must provide the action with OTHERGIT_HTTPS_REF in order to deploy.like xxx.com/OTHER_GIT_USERNAME/YYY.git"
+if [ -z "${GITEE_HTTPS_REF}" ]; then
+    echo "You must provide the action with GITEE_HTTPS_REF in order to deploy.like xxx.com/GITEE_USERNAME/YYY.git"
     exit 1
 fi
 if [ -z "${PRIVATE_GITHUB_TOKEN}" ]; then
@@ -17,12 +17,12 @@ if [ -z "${PRIVATE_GITHUB_TOKEN}" ]; then
     exit 1
 fi
 
-if [ -z "${OTHER_GIT_USERNAME}" ]; then
-    echo "You must provide the action with OTHER_GIT_USERNAME in order to deploy."
+if [ -z "${GITEE_USERNAME}" ]; then
+    echo "You must provide the action with GITEE_USERNAME in order to deploy."
     exit 1
 fi
-if [ -z "${OTHER_GIT_TOKEN}" ]; then
-    echo "You must provide the action with OTHER_GIT_TOKEN in order to deploy."
+if [ -z "${GITEE_TOKEN}" ]; then
+    echo "You must provide the action with GITEE_TOKEN in order to deploy."
     exit 1
 fi
 
@@ -33,13 +33,13 @@ else
     PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
 git clone https://${PRIVATE_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git githubTmp
-git clone https://${OTHER_GIT_USERNAME}:${OTHER_GIT_TOKEN}@${OTHERGIT_HTTPS_REF}  otherGitTmp
+git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_HTTPS_REF}  giteeTmp
 
 
 
 cd ./githubTmp
 git pull
-cd ../otherGitTmp
+cd ../giteeTmp
 git pull
 # 把github的文件全量复制到otherGitTmp中
 cp -R  ../githubTmp/* ./
@@ -49,6 +49,6 @@ git config user.email ${PUBLISH_EMAIL}
 # 进入 other git 开始操作
 echo 'date' >> today.txt
 git add .
-git commit -m "Sync From GitHub By sync-2-gitee action"t
-# push to other GIT
+git commit -m "Sync From GitHub By sync-2-gitee action"
+# push to gitee
 git push
