@@ -38,7 +38,7 @@ cd ./githubTmp
 git config user.name "Forest10"
 git config user.email ${PUBLISH_EMAIL}
 ###获取当前分支名称
-nowBranch='git symbolic-ref --short -q HEAD'
+nowBranch=`git symbolic-ref --short -q HEAD`
 ##如果是master
 if [ ${nowBranch} == 'master' ]; then
   echo 'github now in master'
