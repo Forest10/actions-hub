@@ -32,11 +32,11 @@ else
 fi
 git clone https://${PRIVATE_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git githubTmp
 git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_HTTPS_REF} giteeTmp
+## 进入GitHubtmp
+cd ./githubTmp
 # 设置用户名mail
 git config user.name "Forest10"
 git config user.email ${PUBLISH_EMAIL}
-## 进入GitHubtmp
-cd ./githubTmp
 ###获取当前分支名称
 nowBranch='git symbolic-ref --short -q HEAD'
 ##如果是master
@@ -45,7 +45,6 @@ if [ ${nowBranch} == 'master' ]; then
   ###获取所有分支
   for b in $(git branch -r | grep -v -- '->'); do
     branch=${b#*/}
-    cd ./githubTmp
     git checkout branch
     git pull
     cd ../giteeTmp
