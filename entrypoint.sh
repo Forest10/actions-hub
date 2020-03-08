@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/bash -l
 
 set -e
 
@@ -54,7 +54,7 @@ if [ "$githubNowBranch"x = "master"x ]; then
     git pull
     cd ../giteeTmp
     # POSIX
-    if [[ $giteeBranchArray = *$branchName* ]]; then
+    if [[ $giteeBranchArray == *$branchName* ]]; then
         git checkout ${branchName}
     else
         git checkout -b ${branchName}
