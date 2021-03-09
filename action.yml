@@ -1,5 +1,5 @@
-name: ''
-description: ''
+name: 'action-hub'
+description: 'action-hub'
 author: 'Forest10'
 runs:
   using: 'docker'
