@@ -71,7 +71,7 @@ if [ "$githubNowBranch"x = "master"x ]; then
     git push --set-upstream origin ${branchName}
     cd ../githubTmp
   done
-  exit 1
+  exit 0
 fi
 
 cd ./githubTmp
