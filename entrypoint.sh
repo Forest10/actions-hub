@@ -8,7 +8,7 @@ if [ -z "${GITHUB_REPOSITORY}" ]; then
   exit 1
 fi
 if [ -z "${GITEE_HTTPS_REF}" ]; then
-  echo "You must provide the action with GITEE_HTTPS_REF in order to deploy.like xxx.com/GITEE_USERNAME/YYY.git"
+  echo "You must provide the action with GITEE_HTTPS_REF in order to deploy.like gitee.com/Forest10/testSync"
   exit 1
 fi
 if [ -z "${PRIVATE_GITHUB_TOKEN}" ]; then
@@ -25,13 +25,14 @@ if [ -z "${GITEE_TOKEN}" ]; then
   exit 1
 fi
 
+# put default
 if [ -n "${EMAIL}" ]; then
   PUBLISH_EMAIL=${EMAIL}
 else
   PUBLISH_EMAIL="github.forest10@gmail.com"
 fi
 git clone https://${PRIVATE_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git githubTmp
-git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_HTTPS_REF} giteeTmp
+git clone https://${GITEE_USERNAME}:${GITEE_TOKEN}@${GITEE_HTTPS_REF}.git giteeTmp
 cd ./giteeTmp
 # 设置用户名mail
 git config user.name "Forest10"
@@ -64,7 +65,7 @@ if [ "$githubNowBranch"x = "master"x ]; then
     # 把github的文件全量复制到otherGitTmp中
     cp -R ../githubTmp/* ./
     # 进入 other git 开始操作
-    echo $(date) >>today.txt
+    echo $(date) >today.txt
     git add .
     git commit -m "Sync From GitHub By sync-2-gitee action"
     # push to gitee
@@ -81,7 +82,7 @@ git pull
 # 把github的文件全量复制到otherGitTmp中
 cp -R ../githubTmp/* ./
 # 进入 other git 开始操作
-echo $(date) >>today.txt
+echo $(date) >today.txt
 git add .
 git commit -m "Sync From GitHub By sync-2-gitee action"
 # push to gitee
