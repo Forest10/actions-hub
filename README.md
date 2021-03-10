@@ -1,7 +1,6 @@
 # action-hub@sync-2-gitee
 
-![](https://img.shields.io/github/license/shink/bark-action.svg)
-![](https://img.shields.io/badge/language-shell-89E051.svg)
+![](https://img.shields.io/github/license/shink/bark-action.svg)   ![](https://img.shields.io/badge/language-shell-89E051.svg)
 
 An action for [action-hub@sync-2-gitee](https://github.com/Forest10/actions-hub)
 
