@@ -74,8 +74,8 @@ if [ "$githubNowBranch"x = "master"x ]; then
   done
   exit 0
 fi
-
-cd ./githubTmp
+# 有可能不是master分支
+#cd ./githubTmp
 git pull
 cd ../giteeTmp
 git pull
